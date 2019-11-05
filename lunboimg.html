@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="content">
+			<img/>
+			<ul class='cirle'>
+				<li onclick='callback(0)'></li>
+				<li onclick='callback(1)'></li>
+				<li onclick='callback(2)'></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			let zhongzhi = false
+			let t = null
+			let arr = [{
+				img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572873158175&di=9f9427fe6d451a049dd57ae193e33e7e&imgtype=0&src=http%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2694652840-87CE6DD3252180F40A931CAEDC165284%2F0%3Ffmt%3Djpg%26size%3D38%26h%3D530%26w%3D550%26ppv%3D1.jpg",
+				color:'red'
+			},{
+				img:'http://p1.meituan.net/wedding/d5ce4a3e8cc5805acd4403e70251c6db573052.jpg%40watermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20',
+				color:'red'
+			},{
+				img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572873235306&di=a9a972b0dee93392c6964b9be160f6b2&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_match%2F0%2F10679766129%2F0.jpg',
+				color:'red'
+			}]
+			function callback(index){
+				clearTimeout(t)
+				zhongzhi = true
+				document.getElementsByTagName('img')[0].src = arr[index].img
+				for(let i = 0;i<arr.length;i++){
+					if(i!==index){
+						document.getElementsByTagName('li')[i].style.background = '#fff'
+					}
+				}
+				document.getElementsByTagName('li')[index].style.background = arr[index].color
+					zhongzhi = false
+					add(index)
+			}
+			function add(i){
+				if(zhongzhi){
+					return
+				}
+				if(!i){
+					i=0
+					document.getElementsByTagName('img')[0].src = arr[i].img
+					document.getElementsByTagName('li')[i].style.background = arr[i].color
+				}
+		t=setTimeout(()=>{
+					document.getElementsByTagName('li')[i].style.background ='#fff'
+						i++
+						if(i===arr.length){
+							add()
+							return
+						}
+						document.getElementsByTagName('img')[0].src = arr[i].img
+						document.getElementsByTagName('li')[i].style.background = arr[i].color
+						add(i)
+					},1000)
+			}
+			add()
+		</script>
+	</body>
+	<style type="text/css">
+		*{
+			margin:0px;
+			padding:0px;
+			list-style: none;
+		}
+		#content{
+			width:50%;
+			height:500px;
+			margin:0px auto;
+			position: relative;
+		}
+		img{
+			width:100%;
+			height:100%
+		}
+		.cirle{
+			position: absolute;
+			width:90%;
+			height:20px;
+			left:5%;
+			bottom:20px;
+			display:flex;
+			justify-content: space-between;
+		}
+		.cirle li{
+			width:15px;
+			height:15px;
+			border-radius: 50%;
+			background:#fff;
+		}
+	</style>
+</html>
